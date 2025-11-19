@@ -45,7 +45,7 @@
                         <div class="beta-products-list">
                             <h4>New Products</h4>
                             <div class="beta-products-details">
-                                <p class="pull-left">{{ count($new_product) }} styles found</p>
+                                <p class="pull-left">{{ $new_product->total() }} styles found</p>
                                 <div class="clearfix"></div>
                             </div>
 
@@ -97,22 +97,23 @@
 
                             </div>
                             <!-- Pagination -->
-                            <div class="row">{!! $new_product->links('pagination::bootstrap-4') !!}
+                            <div class="col-sm-12 text-left">
+                                {!! $new_product->links('pagination::bootstrap-4') !!}
                             </div>
                         </div> <!-- .beta-products-list -->
 
                         <div class="space50">&nbsp;</div>
 
                         <div class="beta-products-list">
-                            <h4>Top Products - Sản phẩm khuyến mãi</h4>
+                            <h4>Top Products</h4>
 
                             <div class="beta-products-details">
-                                <p class="pull-left">{{ count($sanpham_khuyenmai) }} styles found</p>
+                                <p class="pull-left">{{ $top_products->total() }} styles found</p>
                                 <div class="clearfix"></div>
                             </div>
 
                             <div class="row">
-                                @foreach ($sanpham_khuyenmai as $spkm)
+                                @foreach ($top_products as $spkm)
                                     <div class="col-sm-3">
                                         <div class="single-item">
 
@@ -166,8 +167,9 @@
                             </div>
 
                             <div class="row" style="margin-top: 20px;">
+                                <!-- Pagination -->
                                 <div class="col-sm-12 text-left">
-                                    {!! $sanpham_khuyenmai->links('pagination::bootstrap-4') !!}
+                                    {!! $top_products->links('pagination::bootstrap-4') !!}
                                 </div>
                             </div>
                         </div>

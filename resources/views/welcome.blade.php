@@ -10,227 +10,228 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style>
-        :root {
-            --warm-bg: #fdf7f2;      /* nền trắng pha be ấm */
-            --card-bg: #ffffff;
-            --ink: #1f2933;          /* chữ đậm, dễ đọc */
-            --muted: #6b7280;
-            --accent: #f97316;       /* cam ấm */
-            --accent-soft: #fed7aa;
-        }
+    :root {
+        /* Palette be ấm */
+        --warm-bg: #f5efe6;      /* nền chung */
+        --card-bg: #fffaf3;      /* card be nhạt */
+        --ink: #2f2a24;          /* chữ nâu đậm */
+        --muted: #7a6a57;       /* chữ phụ */
+        --accent: #d4a373;      /* be đậm / caramel */
+        --accent-soft: #f2ddc3; /* be nhạt */
+    }
 
-        * {
-            box-sizing: border-box;
-        }
+    * {
+        box-sizing: border-box;
+    }
 
-        body {
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle at top, #fff7ed 0, var(--warm-bg) 55%, #f5ebe0 100%);
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: var(--ink);
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at top, #fff7ec 0, var(--warm-bg) 55%, #e8d8c4 100%);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: var(--ink);
+        opacity: 0;
+        transition: opacity .5s ease-out;
+    }
+
+    body.ready {
+        opacity: 1;
+    }
+
+    .welcome-shell {
+        width: 100%;
+        padding: 1.5rem;
+    }
+
+    .welcome-card {
+        max-width: 560px;
+        margin: 0 auto;
+        background: var(--card-bg);
+        border-radius: 18px;
+        padding: 2.25rem 2rem;
+        box-shadow:
+            0 18px 40px rgba(87, 65, 45, 0.16),
+            0 0 0 1px rgba(180, 155, 125, 0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Vệt màu be nhẹ ở góc */
+    .welcome-card::before {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background:
+            radial-gradient(circle at top left, rgba(222, 184, 135, 0.18), transparent 55%),
+            radial-gradient(circle at bottom right, rgba(215, 170, 118, 0.14), transparent 60%);
+        opacity: 0.9;
+        pointer-events: none;
+    }
+
+    .welcome-inner {
+        position: relative;
+        z-index: 1;
+    }
+
+    .badge-soft {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.25rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+        background: rgba(242, 221, 195, 0.7);
+        border: 1px solid rgba(212, 163, 115, 0.8);
+        color: #7a4b25;
+    }
+
+    .badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 10px rgba(212, 163, 115, 0.8);
+    }
+
+    h1.display-title {
+        margin-top: 1.25rem;
+        margin-bottom: 0.75rem;
+        font-size: clamp(1.9rem, 3vw, 2.4rem);
+        font-weight: 750;
+        letter-spacing: .02em;
+        color: var(--ink);
+    }
+
+    .subtitle {
+        color: var(--muted);
+        font-size: 0.98rem;
+        line-height: 1.6;
+        margin-bottom: 1.75rem;
+    }
+
+    .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-top: 1.5rem;
+    }
+
+    .soft-pill {
+        padding: 0.2rem 0.7rem;
+        border-radius: 999px;
+        background: #fff7eb;
+        border: 1px solid var(--accent-soft);
+        color: #7a4b25;
+        font-size: 0.75rem;
+    }
+
+    /* Nút Enter the App – chuyển sang be */
+    .enter-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        padding: 0.75rem 1.9rem;
+        border-radius: 999px;
+        border: none;
+        outline: none;
+        background: linear-gradient(135deg, #f2ddc3, #d4a373);
+        color: #2a211a;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+        cursor: pointer;
+        overflow: hidden;
+        box-shadow:
+            0 12px 26px rgba(147, 112, 76, 0.4),
+            0 0 0 1px rgba(255, 253, 250, 0.8);
+        transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+
+    .enter-btn span.label-main {
+        position: relative;
+        z-index: 2;
+    }
+
+    .enter-btn span.label-sub {
+        position: relative;
+        z-index: 2;
+        font-size: 0.66rem;
+        text-transform: none;
+        letter-spacing: 0;
+        opacity: 0.9;
+    }
+
+    .enter-btn svg {
+        position: relative;
+        z-index: 2;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+
+    .enter-btn:hover {
+        transform: translateY(-1px) scale(1.01);
+        filter: brightness(1.04);
+        box-shadow:
+            0 18px 38px rgba(147, 112, 76, 0.55),
+            0 0 0 1px rgba(255, 255, 255, 0.9);
+    }
+
+    .enter-btn:active {
+        transform: translateY(0) scale(0.98);
+        box-shadow:
+            0 10px 20px rgba(0, 0, 0, 0.18),
+            0 0 0 1px rgba(160, 130, 95, 0.9);
+    }
+
+    /* Ripple effect */
+    .enter-btn .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 550ms ease-out;
+        background: rgba(255, 255, 255, 0.55);
+        pointer-events: none;
+    }
+
+    @keyframes ripple {
+        to {
+            transform: scale(3.6);
             opacity: 0;
-            transition: opacity .5s ease-out;
         }
+    }
 
-        body.ready {
-            opacity: 1;
-        }
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #22c55e;
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.18);
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 0.3rem;
+    }
 
-        .welcome-shell {
-            width: 100%;
-            padding: 1.5rem;
-        }
-
+    @media (max-width: 576px) {
         .welcome-card {
-            max-width: 560px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            border-radius: 18px;
-            padding: 2.25rem 2rem;
-            box-shadow:
-                0 18px 40px rgba(15, 23, 42, 0.08),
-                0 0 0 1px rgba(148, 163, 184, 0.2);
-            position: relative;
-            overflow: hidden;
+            padding: 1.75rem 1.4rem;
         }
+    }
+</style>
 
-        /* Vệt màu ấm nhẹ ở góc */
-        .welcome-card::before {
-            content: "";
-            position: absolute;
-            inset: -40%;
-            background:
-                radial-gradient(circle at top left, rgba(248, 180, 123, 0.18), transparent 55%),
-                radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.13), transparent 60%);
-            opacity: 0.8;
-            pointer-events: none;
-        }
-
-        .welcome-inner {
-            position: relative;
-            z-index: 1;
-        }
-
-        .badge-soft {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.25rem 0.8rem;
-            border-radius: 999px;
-            font-size: 0.7rem;
-            letter-spacing: .15em;
-            text-transform: uppercase;
-            background: rgba(254, 215, 170, 0.4);
-            border: 1px solid rgba(248, 180, 123, 0.6);
-            color: #9a3412;
-        }
-
-        .badge-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: var(--accent);
-            box-shadow: 0 0 12px rgba(249, 115, 22, 0.8);
-        }
-
-        h1.display-title {
-            margin-top: 1.25rem;
-            margin-bottom: 0.75rem;
-            font-size: clamp(1.9rem, 3vw, 2.4rem);
-            font-weight: 750;
-            letter-spacing: .02em;
-            color: var(--ink);
-        }
-
-        .subtitle {
-            color: var(--muted);
-            font-size: 0.98rem;
-            line-height: 1.6;
-            margin-bottom: 1.75rem;
-        }
-
-        .meta-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-            font-size: 0.82rem;
-            color: var(--muted);
-            margin-top: 1.5rem;
-        }
-
-        .soft-pill {
-            padding: 0.2rem 0.7rem;
-            border-radius: 999px;
-            background: #fffbeb;
-            border: 1px solid #fed7aa;
-            color: #92400e;
-            font-size: 0.75rem;
-        }
-
-        /* Nút Enter the App */
-        .enter-btn {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.45rem;
-            padding: 0.75rem 1.9rem;
-            border-radius: 999px;
-            border: none;
-            outline: none;
-            background: linear-gradient(135deg, #fb923c, #f97316);
-            color: #fff;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: .12em;
-            cursor: pointer;
-            overflow: hidden;
-            box-shadow:
-                0 12px 28px rgba(248, 148, 80, 0.55),
-                0 0 0 1px rgba(248, 250, 252, 0.35);
-            transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-        }
-
-        .enter-btn span.label-main {
-            position: relative;
-            z-index: 2;
-        }
-
-        .enter-btn span.label-sub {
-            position: relative;
-            z-index: 2;
-            font-size: 0.66rem;
-            text-transform: none;
-            letter-spacing: 0;
-            opacity: 0.9;
-        }
-
-        .enter-btn svg {
-            position: relative;
-            z-index: 2;
-            width: 16px;
-            height: 16px;
-            flex-shrink: 0;
-        }
-
-        .enter-btn:hover {
-            transform: translateY(-1px) scale(1.01);
-            filter: brightness(1.03);
-            box-shadow:
-                0 18px 40px rgba(248, 148, 80, 0.8),
-                0 0 0 1px rgba(255, 255, 255, 0.7);
-        }
-
-        .enter-btn:active {
-            transform: translateY(0) scale(0.98);
-            box-shadow:
-                0 10px 22px rgba(0, 0, 0, 0.2),
-                0 0 0 1px rgba(148, 163, 184, 0.7);
-        }
-
-        /* Ripple effect */
-        .enter-btn .ripple {
-            position: absolute;
-            border-radius: 50%;
-            transform: scale(0);
-            animation: ripple 550ms ease-out;
-            background: rgba(255, 255, 255, 0.35);
-            pointer-events: none;
-        }
-
-        @keyframes ripple {
-            to {
-                transform: scale(3.6);
-                opacity: 0;
-            }
-        }
-
-        /* Chấm trạng thái nho nhỏ */
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: #22c55e;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.18);
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 0.3rem;
-        }
-
-        @media (max-width: 576px) {
-            .welcome-card {
-                padding: 1.75rem 1.4rem;
-            }
-        }
-    </style>
 </head>
 <body>
 <div class="welcome-shell">
