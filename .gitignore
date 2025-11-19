@@ -67,3 +67,9 @@ Thumbs.db
 /idea/
 *.temp
 *.tmp
+rr
+.rr.yaml
+
+**/caddy
+frankenphp
+frankenphp-worker.php

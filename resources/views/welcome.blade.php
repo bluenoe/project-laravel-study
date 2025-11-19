@@ -3,180 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Laravel</title>
+    <title>Welcome | Blu Laravel</title>
 
-    <!-- Bootstrap 4 -->
+    <!-- Bootstrap 4 (nếu sau này cần xài) -->
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style>
-        /* Background gradient chuyển màu liên tục */
+        :root {
+            --warm-bg: #fdf7f2;      /* nền trắng pha be ấm */
+            --card-bg: #ffffff;
+            --ink: #1f2933;          /* chữ đậm, dễ đọc */
+            --muted: #6b7280;
+            --accent: #f97316;       /* cam ấm */
+            --accent-soft: #fed7aa;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             min-height: 100vh;
             margin: 0;
+            padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(120deg, #1d2671, #c33764, #ff9f43, #1dd1a1);
-            background-size: 300% 300%;
-            animation: bg-pan 12s ease-in-out infinite;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: #f8f9fa;
+            background: radial-gradient(circle at top, #fff7ed 0, var(--warm-bg) 55%, #f5ebe0 100%);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--ink);
+            opacity: 0;
+            transition: opacity .5s ease-out;
         }
 
-        @keyframes bg-pan {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        body.ready {
+            opacity: 1;
         }
 
-        /* Card kiểu glassmorphism */
-        .hero-card {
-            background: rgba(15, 23, 42, 0.75);
-            border-radius: 20px;
-            padding: 2.5rem 2.75rem;
-            box-shadow:
-                0 20px 40px rgba(0, 0, 0, 0.45),
-                0 0 0 1px rgba(148, 163, 184, 0.25);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            max-width: 560px;
+        .welcome-shell {
             width: 100%;
-            text-align: center;
-            animation: floatUp 0.8s ease-out;
+            padding: 1.5rem;
         }
 
-        @keyframes floatUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px) scale(0.97);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        .welcome-card {
+            max-width: 560px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 2.25rem 2rem;
+            box-shadow:
+                0 18px 40px rgba(15, 23, 42, 0.08),
+                0 0 0 1px rgba(148, 163, 184, 0.2);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Chữ Laravel highlight */
-        .laravel-badge {
+        /* Vệt màu ấm nhẹ ở góc */
+        .welcome-card::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background:
+                radial-gradient(circle at top left, rgba(248, 180, 123, 0.18), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.13), transparent 60%);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .welcome-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge-soft {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            padding: 0.25rem 0.85rem;
+            gap: 0.5rem;
+            padding: 0.25rem 0.8rem;
             border-radius: 999px;
-            font-size: 0.8rem;
-            letter-spacing: .12em;
+            font-size: 0.7rem;
+            letter-spacing: .15em;
             text-transform: uppercase;
-            background: rgba(248, 250, 252, 0.06);
-            border: 1px solid rgba(248, 250, 252, 0.18);
-            color: #e5e7eb;
+            background: rgba(254, 215, 170, 0.4);
+            border: 1px solid rgba(248, 180, 123, 0.6);
+            color: #9a3412;
         }
 
-        .laravel-dot {
+        .badge-dot {
             width: 8px;
             height: 8px;
             border-radius: 999px;
-            background: #f97316;
+            background: var(--accent);
             box-shadow: 0 0 12px rgba(249, 115, 22, 0.8);
         }
 
-        /* Title gradient */
-        .display-4 {
-            font-weight: 800;
-            letter-spacing: .03em;
-            background: linear-gradient(120deg, #ff9ff3, #feca57, #1dd1a1, #54a0ff);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: text-shine 6s ease-in-out infinite;
-            margin-bottom: .75rem;
+        h1.display-title {
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
+            font-size: clamp(1.9rem, 3vw, 2.4rem);
+            font-weight: 750;
+            letter-spacing: .02em;
+            color: var(--ink);
         }
 
-        @keyframes text-shine {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .lead {
-            color: #cbd5f5;
-            font-size: 1.02rem;
-        }
-
-        /* Button chính */
-        .btn-primary.glow-btn {
-            border-radius: 999px;
-            padding: 0.7rem 1.9rem;
-            font-weight: 600;
+        .subtitle {
+            color: var(--muted);
             font-size: 0.98rem;
-            letter-spacing: .05em;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            line-height: 1.6;
+            margin-bottom: 1.75rem;
+        }
+
+        .meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-top: 1.5rem;
+        }
+
+        .soft-pill {
+            padding: 0.2rem 0.7rem;
+            border-radius: 999px;
+            background: #fffbeb;
+            border: 1px solid #fed7aa;
+            color: #92400e;
+            font-size: 0.75rem;
+        }
+
+        /* Nút Enter the App */
+        .enter-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            padding: 0.75rem 1.9rem;
+            border-radius: 999px;
             border: none;
+            outline: none;
+            background: linear-gradient(135deg, #fb923c, #f97316);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            cursor: pointer;
+            overflow: hidden;
             box-shadow:
-                0 10px 25px rgba(248, 113, 113, 0.55),
-                0 0 0 1px rgba(248, 250, 252, 0.12);
+                0 12px 28px rgba(248, 148, 80, 0.55),
+                0 0 0 1px rgba(248, 250, 252, 0.35);
             transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
         }
 
-        .btn-primary.glow-btn:hover {
-            transform: translateY(-2px) scale(1.02);
-            filter: brightness(1.08);
-            box-shadow:
-                0 18px 40px rgba(248, 113, 113, 0.8),
-                0 0 0 1px rgba(248, 250, 252, 0.28);
+        .enter-btn span.label-main {
+            position: relative;
+            z-index: 2;
         }
 
-        .btn-primary.glow-btn:active {
+        .enter-btn span.label-sub {
+            position: relative;
+            z-index: 2;
+            font-size: 0.66rem;
+            text-transform: none;
+            letter-spacing: 0;
+            opacity: 0.9;
+        }
+
+        .enter-btn svg {
+            position: relative;
+            z-index: 2;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-1px) scale(1.01);
+            filter: brightness(1.03);
+            box-shadow:
+                0 18px 40px rgba(248, 148, 80, 0.8),
+                0 0 0 1px rgba(255, 255, 255, 0.7);
+        }
+
+        .enter-btn:active {
             transform: translateY(0) scale(0.98);
             box-shadow:
-                0 8px 18px rgba(0, 0, 0, 0.7),
-                0 0 0 1px rgba(15, 23, 42, 0.9);
+                0 10px 22px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(148, 163, 184, 0.7);
         }
 
-        /* Footer nhỏ */
-        .meta {
-            margin-top: 1.5rem;
-            font-size: 0.8rem;
-            color: #94a3b8;
+        /* Ripple effect */
+        .enter-btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 550ms ease-out;
+            background: rgba(255, 255, 255, 0.35);
+            pointer-events: none;
         }
 
-        .meta span {
-            opacity: .9;
+        @keyframes ripple {
+            to {
+                transform: scale(3.6);
+                opacity: 0;
+            }
+        }
+
+        /* Chấm trạng thái nho nhỏ */
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.18);
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.3rem;
+        }
+
+        @media (max-width: 576px) {
+            .welcome-card {
+                padding: 1.75rem 1.4rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container d-flex justify-content-center align-items-center">
-        <div class="hero-card">
-            <div class="mb-3">
-                <span class="laravel-badge">
-                    <span class="laravel-dot"></span>
-                    LARAVEL SANDBOX READY
-                </span>
-            </div>
+<div class="welcome-shell">
+    <div class="welcome-card">
+        <div class="welcome-inner text-left">
+            <span class="badge-soft mb-2">
+                <span class="badge-dot"></span>
+                LARAVEL · LOCAL ENV
+            </span>
 
-            <h1 class="display-4">Welcome to Laravel</h1>
-            <p class="lead mb-4">
-                Your backend is alive, routes are breathing, and the dev universe is
-                ready for your next legendary project.
+            <h1 class="display-title">
+                Welcome to your Laravel space.
+            </h1>
+
+            <p class="subtitle">
+                Your app is up and running. Keep this tab for dev, or jump straight
+                into your homepage when you're ready to build more.
             </p>
 
-            <a href="{{ url('/trangchu') }}" class="btn btn-primary glow-btn mt-1">
-                Enter the App
-            </a>
+            <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-2">
+                <!-- Nút Enter the App -->
+                <form action="{{ url('/trangchu') }}" method="get">
+                    <button type="submit" class="enter-btn" id="enterBtn">
+                        <span class="label-main">Enter the app</span>
+                        <span class="label-sub d-none d-md-inline">Go to your main page</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor"
+                                  d="M13.25 5.25a.75.75 0 0 1 .75-.75h5.75a.75.75 0 0 1 .75.75v5.75a.75.75 0 0 1-1.5 0V7.31l-6.72 6.72a.75.75 0 1 1-1.06-1.06L17.94 6.25h-3.94a.75.75 0 0 1-.75-.75Z"/>
+                            <path fill="currentColor"
+                                  d="M6.75 5.5A1.25 1.25 0 0 0 5.5 6.75v10.5a1.25 1.25 0 0 0 1.25 1.25h10.5a1.25 1.25 0 0 0 1.25-1.25V14a.75.75 0 0 1 1.5 0v3.25A2.75 2.75 0 0 1 17.25 20H6.75A2.75 2.75 0 0 1 4 17.25V6.75A2.75 2.75 0 0 1 6.75 4h3.25a.75.75 0 0 1 0 1.5H6.75Z"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
 
-            <div class="meta">
-                <span>Environment: <strong>local</strong> · Mode: <strong>developer</strong> · Status: <strong>online ✅</strong></span>
+            <div class="meta-row">
+                <div>
+                    <span class="status-dot"></span>
+                    Environment: <strong>local</strong> · Mode: <strong>developer</strong>
+                </div>
+                <div class="soft-pill">
+                    Minimal · Warm tone · Ready to ship
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Optional Bootstrap JS (nếu cần sau này) -->
-    <!--
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    -->
+<!-- JS nhỏ tăng UX -->
+<script>
+    // Fade-in khi load
+    document.addEventListener('DOMContentLoaded', function () {
+        document.body.classList.add('ready');
+    });
+
+    // Ripple effect cho nút Enter the App
+    const enterBtn = document.getElementById('enterBtn');
+    if (enterBtn) {
+        enterBtn.addEventListener('click', function (e) {
+            const existing = this.querySelector('.ripple');
+            if (existing) {
+                existing.remove();
+            }
+
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+
+            this.appendChild(ripple);
+        });
+    }
+</script>
+
+<!-- Bootstrap JS (tuỳ, nếu sau này xài) -->
+<!--
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+-->
 </body>
 </html>
