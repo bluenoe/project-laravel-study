@@ -24,15 +24,18 @@ class PageController extends Controller
 
     public function getDetail(Request $request)
     {
-        $sanpham = Product::where('id', $request->id)->first();
-        $splienquan = Product::where('id_type', $sanpham->id_type)
-            ->where('id', '<>', $sanpham->id)
+        $product = Product::where('id', $request->id)->first();
+
+        // Get related products (same category/type but different ID)
+        $relatedProducts = Product::where('id_type', $product->id_type)
+            ->where('id', '<>', $product->id)
             ->paginate(3);
 
         $comments = Comment::where('id_product', $request->id)->get();
 
-        return view('page.product_detail', compact('sanpham', 'splienquan', 'comments'));
+        return view('page.product_detail', compact('product', 'relatedProducts', 'comments'));
     }
+
 
     public function getAddToCart($id)
     {
