@@ -10,11 +10,10 @@ Route::get('/', function () {
 
 // Trang chủ dùng PageController@getIndex (cũ)
 // Trang chủ
-
 Route::get('/trang-chu', [PageController::class, 'index'])->name('home');
 
 // Loại sản phẩm
-Route::get('/loai-san-pham/{id}', [PageController::class, 'showCategory'])->name('category.show');
+Route::get('/loai-san-pham', [PageController::class, 'showCategory'])->name('products.index');
 
 // Chi tiết sản phẩm
 Route::get('/san-pham/{id}', [PageController::class, 'show'])->name('product.show');

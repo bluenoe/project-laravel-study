@@ -108,12 +108,12 @@
                             <h4>Top Products</h4>
 
                             <div class="beta-products-details">
-                                <p class="pull-left">{{ $top_products->total() }} styles found</p>
+                                <p class="pull-left">{{ $topProducts->total() }} styles found</p>
                                 <div class="clearfix"></div>
                             </div>
 
                             <div class="row">
-                                @foreach ($top_products as $spkm)
+                                @foreach ($topProducts as $spkm)
                                     <div class="col-sm-3">
                                         <div class="single-item">
 
@@ -170,7 +170,7 @@
                             <div class="row" style="margin-top: 20px;">
                                 <!-- Pagination -->
                                 <div class="col-sm-12 text-left">
-                                    {!! $top_products->links('pagination::bootstrap-4') !!}
+                                    {!! $topProducts->links('pagination::bootstrap-4') !!}
                                 </div>
                             </div>
                         </div>

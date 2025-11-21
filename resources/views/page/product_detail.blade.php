@@ -241,7 +241,7 @@
                         </div>
                     </div>
 
-                    {{-- MORE WIDGETS... (bản gốc bà có rất nhiều static items) --}}
+                    {{-- MORE WIDGETS... --}}
 
                 </div>
 

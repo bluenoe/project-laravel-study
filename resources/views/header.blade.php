@@ -20,7 +20,7 @@
     <div class="header-body">
         <div class="container beta-relative">
             <div class="pull-left">
-                <a href="{{ route('trangchu') }}" id="logo"><img src="source/assets/dest/images/logo-cake.png" width="200px"
+                <a href="{{ route('home') }}" id="logo"><img src="source/assets/dest/images/logo-cake.png" width="200px"
                         alt=""></a>
             </div>
             <div class="pull-right beta-components space-left ov">
@@ -98,16 +98,16 @@
             <div class="visible-xs clearfix"></div>
             <nav class="main-menu">
                 <ul class="l-inline ov">
-                    <li><a href="{{ route('trangchu') }}">Trang chủ</a></li>
-                    <li><a href="{{ route('loaisanpham') }}">Sản phẩm</a>
+                    <li><a href="{{ route('home') }}">Trang chủ</a></li>
+                    <li><a href="{{ route('products.index') }}">Sản phẩm</a>
                         <ul class="sub-menu">
                             <li><a href="product_type.html">Sản phẩm 1</a></li>
                             <li><a href="product_type.html">Sản phẩm 2</a></li>
                             <li><a href="product_type.html">Sản phẩm 4</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ route('gioithieu') }}">Giới thiệu</a></li>
-                    <li><a href="{{ route('lienhe') }}">Liên hệ</a></li>
+                    <li><a href="{{ route('contact') }}">Giới thiệu</a></li>
+                    <li><a href="{{ route('about') }}">Liên hệ</a></li>
                 </ul>
                 <div class="clearfix"></div>
             </nav>
