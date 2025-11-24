@@ -1,5 +1,5 @@
 {{-- resources/views/pageadmin/formDelete.blade.php --}}
-@extends('master') {{-- nếu mấy file Add/Edit đang @extends('master') thì giữ y chang, nếu khác thì đổi lại cho khớp --}}
+@extends('master') 
 @section('content')
 
 <div class="container beta-relative">
@@ -9,7 +9,6 @@
 
     <div class="space50">&nbsp;</div>
 
-    {{-- nếu bà có include error giống formAdd / formEdit thì giữ lại --}}
     @includeWhen(View::exists('error'), 'error')
 
     <div class="container">

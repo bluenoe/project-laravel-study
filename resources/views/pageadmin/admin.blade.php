@@ -72,13 +72,18 @@
         <td>{{$product->unit}}</td>
         <td>{{$product->new}}</td>
         <td>
-          <a href='admin-edit-form/{{$product->id}}' type="submit" class="btn btn-warning" style="width:80px;">Edit</a>
-          <a href="{{ route('admin-delete-form', $product->id) }}"
-   class="btn btn-danger" style="width:80px;">
-    Delete
-</a>
+  <a href="{{ url('admin-edit-form/'.$product->id) }}" class="btn btn-warning" style="width:80px;">
+      Edit
+  </a>
 
-        </td>
+  <form action="{{ route('admin.delete', $product->id) }}" method="POST" style="display:inline;">
+      @csrf
+      <button type="submit" class="btn btn-danger" style="width:80px;">
+          Delete
+      </button>
+  </form>
+</td>
+
 
       </tr>
       @endforeach
