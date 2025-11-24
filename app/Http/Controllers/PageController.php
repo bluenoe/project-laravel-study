@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Slide;
 use App\Models\Product;
 use App\Models\Comment;
+use App\Models\ProductType;
+use App\Models\BillDetail;
+
 
 class PageController extends Controller
 {
@@ -30,7 +33,7 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::findOrFail($id)->first();
 
         // Sản phẩm liên quan (cùng loại)
         $relatedProducts = Product::where('id_type', $product->id_type)
@@ -43,13 +46,14 @@ class PageController extends Controller
         return view('page.product_detail', compact('product', 'relatedProducts', 'comments'));
     }
 
-    /**
+    /*
      * Loại sản phẩm (Category)
-     */
+    */
     public function showCategory()
     {
-        return view('page.product'); 
+        return view('page.product');
     }
+    
 
     /**
      * Thêm giỏ hàng
@@ -74,4 +78,65 @@ class PageController extends Controller
     {
         return view('page.about');
     }
+
+
+    /**
+     * Sản phẩm theo loại
+     */
+    public function getProductByType($type)
+    {
+        $productTypes = ProductType::all();       // show ra ten loai sp
+
+        $productsByType = Product::where('id_type', $type)->get();
+
+        $otherProducts = Product::where('id_type', '<>', $type)->paginate(3);
+
+        // Get the current type
+        $type = ProductType::find($type);
+
+        return view('page.product', compact('productsByType', 'productTypes', 'otherProducts', 'type'));
+    }
+
+/**
+     * Trang admin
+     */
+
+    public function getIndexAdmin()
+    {
+        $products =  Product::all();
+        return view('pageadmin.admin')->with(['products' => $products, 'sumSold' => count(BillDetail::all())]);
+    }
+
+    public function export()
+{
+    return "Export PDF here!";
+
+}
+    public function getAdminAddForm()
+    {
+        return view('pageadmin.formAdd');
+    }
+
+    public function getAdminEditForm($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('pageadmin.formEdit', compact('product'));
+    }
+
+
+    public function getAdminDeleteForm($id)
+{
+    $product = Product::findOrFail($id);
+    return view('pageadmin.formDelete', compact('product'));
+}
+
+public function deleteProduct($id)
+{
+    $product = Product::findOrFail($id);
+    $product->delete();
+
+    return redirect()->route('admin.index')
+        ->with('success', 'Đã xóa sản phẩm thành công.');
+}
+
 }

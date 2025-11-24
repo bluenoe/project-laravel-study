@@ -100,10 +100,10 @@
                 <ul class="l-inline ov">
                     <li><a href="{{ route('home') }}">Trang chủ</a></li>
                     <li><a href="{{ route('products.index') }}">Sản phẩm</a>
-                        <ul class="sub-menu">
-                            <li><a href="product_type.html">Sản phẩm 1</a></li>
-                            <li><a href="product_type.html">Sản phẩm 2</a></li>
-                            <li><a href="product_type.html">Sản phẩm 4</a></li>
+                        <ul class="sub-menu">  
+                           @foreach($categories as $category) 
+                            <li><a href="{{ route('products.category', $category->id) }}">{{ $category->name }}</a></li>
+                           @endforeach
                         </ul>
                     </li>
                     <li><a href="{{ route('contact') }}">Giới thiệu</a></li>
