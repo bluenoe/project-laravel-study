@@ -39,9 +39,10 @@
                                     Yes, delete it
                                 </button>
 
-                                <a href="{{ route('admin.index') }}" class="btn btn-default">
+                                <a href="{{ route('admin.index') }}" class="btn btn-default" style="margin-left: 8px;">
                                     Cancel
                                 </a>
+
                             </form>
 
                         </div>

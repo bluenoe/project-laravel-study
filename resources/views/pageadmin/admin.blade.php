@@ -79,13 +79,11 @@
                                 Edit
                             </a>
 
-                            <form action="{{ route('admin.delete', $product->id) }}" method="POST"
-                                style="display:inline;">
-                                @csrf
-                                <button type="submit" class="btn btn-danger" style="width:80px;">
-                                    Delete
-                                </button>
-                            </form>
+                            <a href="{{ route('admin.delete.form', $product->id) }}" class="btn btn-danger"
+                                style="width:80px;">
+                                Delete
+                            </a>
+
                         </td>
 
 

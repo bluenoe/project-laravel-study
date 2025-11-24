@@ -63,10 +63,10 @@ Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEditForm'])
 Route::post('/admin-edit-form/{id}', [PageController::class, 'postAdminEditForm'])
     ->name('admin-edit-form.post');
 
-// Form xác nhận xoá (GET)
+// Trang confirm xoá (chỉ hiển thị form hỏi lại)
 Route::get('/admin-delete-form/{id}', [PageController::class, 'getAdminDeleteForm'])
-    ->name('admin-delete-form');
+    ->name('admin.delete.form');
 
-// Xử lý xoá (POST cho ez)
+// Xử lý xoá (sau khi user bấm Yes)
 Route::post('/admin-delete/{id}', [PageController::class, 'deleteProduct'])
     ->name('admin.delete');
