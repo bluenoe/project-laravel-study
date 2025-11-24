@@ -69,4 +69,4 @@ Route::get('/admin-delete-form/{id}', [PageController::class, 'getAdminDeleteFor
 
 // Xử lý xoá (POST cho ez)
 Route::post('/admin-delete/{id}', [PageController::class, 'deleteProduct'])
-    ->name('admin-delete');
+    ->name('admin.delete');
