@@ -56,9 +56,12 @@ Route::post('/admin-add-form', [PageController::class, 'postAdminAddForm'])
 
 
 // ---------------------------------------------
+
+
 Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEditForm'])
     ->name('admin-edit-form');
-
+Route::post('/admin-edit-form/{id}', [PageController::class, 'postAdminEditForm'])
+    ->name('admin-edit-form.post');
 
 // Form xác nhận xoá (GET)
 Route::get('/admin-delete-form/{id}', [PageController::class, 'getAdminDeleteForm'])

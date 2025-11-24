@@ -14,19 +14,28 @@
   <div class="pull-left">
     <h2>List</h2>
 
-    
+
     <!-- Hiển thị thông báo thành công -->
     @if(session('success'))
-    <div class="alert alert-success" style="margin-top: 20px;">
+    <div class="alert alert-success fade-alert" style="margin-top: 20px;">
         {{ session('success') }}
     </div>
 @endif
 
 @if(session('error'))
-    <div class="alert alert-danger" style="margin-top: 20px;">
+    <div class="alert alert-danger fade-alert" style="margin-top: 20px;">
         {{ session('error') }}
     </div>
 @endif
+
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.fade-alert').forEach(el => {
+            el.style.display = 'none';
+        });
+    }, 3000); 
+</script>
+
 
 
   </div>
