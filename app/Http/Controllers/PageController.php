@@ -113,9 +113,55 @@ class PageController extends Controller
 
 }
     public function getAdminAddForm()
-    {
-        return view('pageadmin.formAdd');
+{
+    return view('pageadmin.formAdd');
+}
+
+public function postAdminAddForm(Request $request)
+{
+    // Validate dữ liệu đầu vào
+    $request->validate([
+        'inputName' => 'required|string|max:255',
+        'inputPrice' => 'required|numeric|min:0',
+        'inputPromotionPrice' => 'nullable|numeric|min:0',
+        'inputUnit' => 'required|string|max:100',
+        'inputNew' => 'required|integer|min:0|max:1',
+        'inputType' => 'required|integer|exists:type_products,id',
+        'inputImage' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'inputDescription' => 'required|string',
+    ]);
+
+    $product = new Product();
+
+    // Upload ảnh chuẩn
+    $file_name = null;
+    if ($request->hasFile('inputImage')) {
+        $file = $request->file('inputImage');
+
+        // Tên file đảm bảo không trùng
+        $file_name = time() . "_" . $file->getClientOriginalName();
+
+        // Lưu vào thư mục public/source/image/product
+        $file->move(public_path('source/image/product'), $file_name);
     }
+
+    // Gán dữ liệu
+    $product->name = $request->inputName;
+    $product->image = $file_name;
+    $product->description = $request->inputDescription;
+    $product->unit_price = $request->inputPrice;
+    $product->promotion_price = $request->inputPromotionPrice ?? 0;
+    $product->unit = $request->inputUnit;
+    $product->new = $request->inputNew;
+    $product->id_type = $request->inputType;
+
+    $product->save();
+
+    // Redirect đúng chuẩn
+    return redirect()->route('admin.index')
+        ->with('success', 'Thêm sản phẩm thành công!');
+}
+
 
     public function getAdminEditForm($id)
     {
@@ -130,7 +176,7 @@ class PageController extends Controller
     return view('pageadmin.formDelete', compact('product'));
 }
 
-public function deleteProduct($id)
+    public function deleteProduct($id)
 {
     $product = Product::findOrFail($id);
     $product->delete();

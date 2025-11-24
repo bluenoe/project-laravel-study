@@ -13,6 +13,22 @@
   </div>
   <div class="pull-left">
     <h2>List</h2>
+
+    
+    <!-- Hiển thị thông báo thành công -->
+    @if(session('success'))
+    <div class="alert alert-success" style="margin-top: 20px;">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger" style="margin-top: 20px;">
+        {{ session('error') }}
+    </div>
+@endif
+
+
   </div>
   <div class="pull-right">
     <a href="{{route('export')}}" class="btn btn-primary">

@@ -30,13 +30,32 @@ Route::get('/gio-hang/them/{id}', [PageController::class, 'addToCart'])->name('c
 // Sản phẩm theo loại
 Route::get('/loai-san-pham/{type}', [PageController::class, 'getProductByType'])->name('products.category');
 
+/*
+* ADMIN page
+*/
+
 Route::get('/admin', [PageController::class, 'getIndexAdmin'])->name('admin.index');
 
 
 Route::get('/export', [PageController::class, 'export'])->name('export');
 
+// ---------------------------------------------
+
 Route::get('/admin/add-product', [PageController::class, 'getAdminAddForm'])->name('add-product');
 
+Route::post('/admin/add-product', [PageController::class, 'postAdminAddForm'])->name('add-product.post');
+
+
+/* hiển thị form
+Route::get('/admin-add-form', [PageController::class, 'getAdminAddForm'])
+    ->name('admin-add-form');
+
+// xử lý lưu sp mới
+Route::post('/admin-add-form', [PageController::class, 'postAdminAddForm'])
+    ->name('admin-add-form.post');   */
+
+
+// ---------------------------------------------
 Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEditForm'])
     ->name('admin-edit-form');
 
@@ -45,6 +64,6 @@ Route::get('/admin-edit-form/{id}', [PageController::class, 'getAdminEditForm'])
 Route::get('/admin-delete-form/{id}', [PageController::class, 'getAdminDeleteForm'])
     ->name('admin-delete-form');
 
-// Xử lý xoá (POST cho dễ)
+// Xử lý xoá (POST cho ez)
 Route::post('/admin-delete/{id}', [PageController::class, 'deleteProduct'])
     ->name('admin-delete');

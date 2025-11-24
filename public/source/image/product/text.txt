@@ -1,0 +1,59 @@
+this is insert mode  
+>>> user@mind:~$ echo "thoughts compiling..."  
+
+once upon a midnight debug,  
+coffee spilled across the console  
+rain tapping like keyboard keys —  
+tick tick tick —  
+someone said “bro you okay?”  
+but the terminal was already talking back  
+
+SO1  
+SO1  
+SO1  
+ii
+ 
+memory leak of emotions detected  
+404 peace not found  
+retrying connection to self...  
+timeout.  
+
+lines of code 
+lines of life  
+both break if you forget the semicolon;  
+both crash if you forget to sleep  
+
+123456789 29139238 32392329 32932321  
+stack overflow of nostalgia  
+while (heart == heavy) { keep_typing(); }  
+
+we used to laugh inside the chatroom  
+sending emojis like they were magic spells  
+now it’s just “seen 2:17 AM” and silence  
+like a server with no request  
+
+test test test  
+the system logs your dreams:  
+> dream_01: running through the city of neon screens  
+> dream_02: trying to sudo your way out of loneliness  
+> dream_03: permission denied.  
+
+you ever feel like your brain’s a loop?  
+if (hope) then (try again)  
+else printf("same day different bug");  
+
+cursor blinking  
+heart syncing  
+tabs vs spaces — still no winner  
+keyboard click sounds = heartbeat simulation  
+
+2
+23456789 29139238 32392329 32932321  
+i press ctrl+s on moments  
+but real life never lets you save  
+
+SO1  
+SO1  
+TEST END  
+process exited with code 0  
+but feelings... still running in background  
