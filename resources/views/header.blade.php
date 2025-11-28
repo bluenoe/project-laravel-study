@@ -20,14 +20,15 @@
     <div class="header-body">
         <div class="container beta-relative">
             <div class="pull-left">
-                <a href="{{ route('home') }}" id="logo"><img src="source/assets/dest/images/logo-cake.png" width="200px"
-                        alt=""></a>
+                <a href="{{ route('home') }}" id="logo"><img src="source/assets/dest/images/logo-cake.png"
+                        width="200px" alt=""></a>
             </div>
             <div class="pull-right beta-components space-left ov">
                 <div class="space10">&nbsp;</div>
                 <div class="beta-comp">
                     <form role="search" method="get" id="searchform" action="/">
-                        <input type="text" value="" name="s" id="s" placeholder="Nhập từ khóa..." />
+                        <input type="text" value="" name="s" id="s"
+                            placeholder="Nhập từ khóa..." />
                         <button class="fa fa-search" type="submit" id="searchsubmit"></button>
                     </form>
                 </div>
@@ -93,17 +94,20 @@
     </div> <!-- .header-body -->
     <div class="header-bottom" style="background-color: #0277b8;">
         <div class="container">
-            <a class="visible-xs beta-menu-toggle pull-right" href="#"><span class='beta-menu-toggle-text'>Menu</span>
+            <a class="visible-xs beta-menu-toggle pull-right" href="#"><span
+                    class='beta-menu-toggle-text'>Menu</span>
                 <i class="fa fa-bars"></i></a>
             <div class="visible-xs clearfix"></div>
             <nav class="main-menu">
                 <ul class="l-inline ov">
                     <li><a href="{{ route('home') }}">Trang chủ</a></li>
                     <li><a href="{{ route('products.index') }}">Sản phẩm</a>
-                        <ul class="sub-menu">  
-                           @foreach($categories as $category) 
-                            <li><a href="{{ route('products.category', $category->id) }}">{{ $category->name }}</a></li>
-                           @endforeach
+                        <ul class="sub-menu">
+                            @foreach ($categories as $category)
+                                <li> <a href="{{ route('products.category', $category->id) }}">{{ $category->name }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
                     <li><a href="{{ route('contact') }}">Giới thiệu</a></li>

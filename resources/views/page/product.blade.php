@@ -8,7 +8,7 @@
 
             <div class="pull-right">
                 <div class="beta-breadcrumb font-large">
-                    <a href="{{ url('/') }}">Home</a> / <span>Sản phẩm</span>
+                    <a href="{{ url('/trang-chu') }}">Home</a> / <span>Sản phẩm</span>
                 </div>
             </div>
 
@@ -30,9 +30,12 @@
                         <ul class="aside-menu">
                             @foreach ($productTypes as $pt)
                                 <li>
-                                    <a href="{{ url('/type/' . $pt->id) }}">{{ $pt->name }}</a>
+                                    <a href="{{ route('products.category', $pt->id) }}">
+                                        {{ $pt->name }}
+                                    </a>
                                 </li>
                             @endforeach
+
                         </ul>
                     </div>
 
