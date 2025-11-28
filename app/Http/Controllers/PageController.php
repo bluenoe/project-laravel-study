@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Slide;
 use App\Models\Product;
-use App\Models\Comment;
 use App\Models\ProductType;
+use App\Models\Comment;
 use App\Models\BillDetail;
 
 
@@ -50,9 +50,20 @@ class PageController extends Controller
      * Loại sản phẩm (Category)
     */
     public function showCategory()
-    {
-        return view('page.product');
-    }
+{
+    // sidebar: các loại sản phẩm
+    $productTypes = ProductType::all();
+
+    // tất cả sản phẩm, có phân trang
+    $productsByType = Product::paginate(9); // mỗi trang 9 sp, thích thì đổi số
+
+    // không xem theo 1 loại cụ thể
+    $type = null;
+
+    return view('page.product', compact('productTypes', 'productsByType', 'type'));
+}
+
+
     
 
     /**
@@ -84,18 +95,21 @@ class PageController extends Controller
      * Sản phẩm theo loại
      */
     public function getProductByType($type)
-    {
-        $productTypes = ProductType::all();       // show ra ten loai sp
+{
+    $productTypes = ProductType::all(); // sidebar
 
-        $productsByType = Product::where('id_type', $type)->get();
+    // sản phẩm theo loại, có phân trang
+    $productsByType = Product::where('id_type', $type)->paginate(9);
 
-        $otherProducts = Product::where('id_type', '<>', $type)->paginate(3);
+    // sản phẩm khác loại, vẫn paginate 3
+    $otherProducts = Product::where('id_type', '<>', $type)->paginate(3);
 
-        // Get the current type
-        $type = ProductType::find($type);
+    // loại hiện tại
+    $type = ProductType::find($type);
 
-        return view('page.product', compact('productsByType', 'productTypes', 'otherProducts', 'type'));
-    }
+    return view('page.product', compact('productsByType', 'productTypes', 'otherProducts', 'type'));
+}
+
 
 /**
      * Trang admin

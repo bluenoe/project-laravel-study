@@ -3,7 +3,7 @@
     <div class="inner-header">
         <div class="container">
             <div class="pull-left">
-                <h6 class="inner-title">Sản phẩm {{ $type->name }}</h6>
+                <h6 class="inner-title">Sản phẩm </h6>
             </div>
 
             <div class="pull-right">
@@ -43,12 +43,12 @@
 
                             <!-- Title -->
                             <h4 style="text-align:center; font-weight:bold;">
-                                {{ $type->name }}
+                                {{ $type->name ?? 'Tất cả sản phẩm' }}
                             </h4>
 
                             <!-- COUNT -->
                             <div class="beta-products-details">
-                                <p class="pull-left">{{ count($productsByType) }} styles found</p>
+                                <p class="pull-left">{{ $productsByType->total() }} styles found</p>
                                 <div class="clearfix"></div>
                             </div>
 
@@ -102,81 +102,89 @@
                                 @endforeach
                             </div>
 
+                            <!-- PAGINATION CHO DANH SÁCH CHÍNH -->
+                            <div class="row">
+                                {{ $productsByType->links('pagination::bootstrap-4') }}
+                            </div>
+
                             <!-- SPACE -->
                             <div class="space50">&nbsp;</div>
 
                         </div> <!-- .beta-products-list -->
 
+                        {{-- Chỉ hiện "Sản phẩm khác" khi đang xem theo 1 loại cụ thể --}}
+                        @if (!empty($type))
+                            <!-- OTHER PRODUCTS -->
+                            <div class="beta-products-list">
 
-                        <!-- OTHER PRODUCTS -->
-                        <div class="beta-products-list">
+                                <h4>Sản phẩm khác</h4>
 
-                            <h4>Sản phẩm khác</h4>
+                                <div class="beta-products-details">
+                                    <p class="pull-left">{{ count($otherProducts) }} founded</p>
+                                    <div class="clearfix"></div>
+                                </div>
 
-                            <div class="beta-products-details">
-                                <p class="pull-left">{{ count($otherProducts) }} founded</p>
-                                <div class="clearfix"></div>
-                            </div>
+                                <div class="row">
+                                    @foreach ($otherProducts as $op)
+                                        <div class="col-sm-3">
+                                            <div class="single-item">
 
-                            <div class="row">
-                                @foreach ($otherProducts as $op)
-                                    <div class="col-sm-3">
-                                        <div class="single-item">
+                                                <div class="single-item-header">
+                                                    <a href="#">
+                                                        <img width="200" height="200"
+                                                            src="/source/image/product/{{ $op->image }}" alt="">
+                                                    </a>
 
-                                            <div class="single-item-header">
-                                                <a href="#">
-                                                    <img width="200" height="200"
-                                                        src="/source/image/product/{{ $op->image }}" alt="">
-                                                </a>
-
-                                                @if ($op->promotion_price != 0)
-                                                    <div class="ribbon-wrapper">
-                                                        <div class="ribbon sale">Sale!</div>
-                                                    </div>
-                                                @endif
-                                            </div>
-
-                                            <div class="single-item-body">
-                                                <p class="single-item-title">{{ $op->name }}</p>
-
-                                                <p class="single-item-price" style="text-align:left; font-size: 15px;">
-                                                    @if ($op->promotion_price == 0)
-                                                        <span class="flash-sale">{{ number_format($op->unit_price) }}
-                                                            Đồng</span>
-                                                    @else
-                                                        <span class="flash-del">{{ number_format($op->unit_price) }}
-                                                            Đồng</span>
-                                                        <span class="flash-sale">{{ number_format($op->promotion_price) }}
-                                                            Đồng</span>
+                                                    @if ($op->promotion_price != 0)
+                                                        <div class="ribbon-wrapper">
+                                                            <div class="ribbon sale">Sale!</div>
+                                                        </div>
                                                     @endif
-                                                </p>
+                                                </div>
+
+                                                <div class="single-item-body">
+                                                    <p class="single-item-title">{{ $op->name }}</p>
+
+                                                    <p class="single-item-price" style="text-align:left; font-size: 15px;">
+                                                        @if ($op->promotion_price == 0)
+                                                            <span class="flash-sale">{{ number_format($op->unit_price) }}
+                                                                Đồng</span>
+                                                        @else
+                                                            <span class="flash-del">{{ number_format($op->unit_price) }}
+                                                                Đồng</span>
+                                                            <span
+                                                                class="flash-sale">{{ number_format($op->promotion_price) }}
+                                                                Đồng</span>
+                                                        @endif
+                                                    </p>
+                                                </div>
+
+                                                <div class="single-item-caption">
+                                                    <a class="add-to-cart pull-left" href="shopping_cart.html">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </a>
+
+                                                    <a class="beta-btn primary" href="product.html">
+                                                        Details <i class="fa fa-chevron-right"></i>
+                                                    </a>
+
+                                                    <div class="clearfix"></div>
+                                                </div>
+
                                             </div>
-
-                                            <div class="single-item-caption">
-                                                <a class="add-to-cart pull-left" href="shopping_cart.html">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                </a>
-
-                                                <a class="beta-btn primary" href="product.html">
-                                                    Details <i class="fa fa-chevron-right"></i>
-                                                </a>
-
-                                                <div class="clearfix"></div>
-                                            </div>
-
                                         </div>
-                                    </div>
-                                @endforeach
-                            </div>
+                                    @endforeach
+                                </div>
 
-                            <!-- PAGINATION -->
-                            <div class="row">
-                                {{ $otherProducts->links('pagination::bootstrap-4') }}
-                            </div>
+                                <!-- PAGINATION -->
+                                <div class="row">
+                                    {{ $otherProducts->links('pagination::bootstrap-4') }}
+                                </div>
 
-                            <div class="space40">&nbsp;</div>
+                                <div class="space40">&nbsp;</div>
 
-                        </div> <!-- .beta-products-list -->
+                            </div> <!-- .beta-products-list -->
+                        @endif
 
                     </div> <!-- .col-sm-9 -->
 
