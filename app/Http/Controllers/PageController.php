@@ -33,7 +33,7 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id)->first();
+        $product = Product::findOrFail($id);
 
         // Sản phẩm liên quan (cùng loại)
         $relatedProducts = Product::where('id_type', $product->id_type)
