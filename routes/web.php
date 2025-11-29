@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -73,6 +74,8 @@ Route::post('/admin-delete/{id}', [PageController::class, 'deleteProduct'])
 
 
 // ---------------------------- Login, Logout, Register ---------------------------
-Route::get('/register', function () {
-    return view('users.register');
-});
+Route::get('/register',  [UserController::class, 'getRegister'])->name('user.getRegister'); 
+
+
+Route::post('/register', [UserController::class, 'Register'])->name('user.register');
+

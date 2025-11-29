@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\Comment;
 use App\Models\BillDetail;
+use App\Models\User;
 
 
 class PageController extends Controller
