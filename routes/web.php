@@ -70,3 +70,9 @@ Route::get('/admin-delete-form/{id}', [PageController::class, 'getAdminDeleteFor
 // Xử lý xoá (sau khi user bấm Yes)
 Route::post('/admin-delete/{id}', [PageController::class, 'deleteProduct'])
     ->name('admin.delete');
+
+
+// ---------------------------- Login, Logout, Register ---------------------------
+Route::get('/register', function () {
+    return view('users.register');
+});

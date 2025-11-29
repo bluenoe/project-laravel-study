@@ -55,7 +55,7 @@ class PageController extends Controller
     $productTypes = ProductType::all();
 
     // tất cả sản phẩm, có phân trang
-    $productsByType = Product::paginate(9); // mỗi trang 9 sp, thích thì đổi số
+    $productsByType = Product::paginate(9); // mỗi trang 9 sp, thíc thì đổi số
 
     // không xem theo 1 loại cụ thể
     $type = null;
