@@ -31,7 +31,7 @@ class UserController extends Controller
     {
         Session::forget('user');
         Session::forget('cart');
-        return redirect('/trangchu');
+        return redirect('/trang-chu');
     }
 
     public function getRegister()

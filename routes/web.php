@@ -79,3 +79,11 @@ Route::get('/register',  [UserController::class, 'getRegister'])->name('user.get
 
 Route::post('/register', [UserController::class, 'Register'])->name('user.register');
 
+
+Route::get('/login', function () {
+    return view('users.login');
+})->name('user.getLogin');
+Route::post('/login', [UserController::class, 'Login'])->name('user.login');
+
+Route::get('/logout', [UserController::class, 'Logout'])->name('user.logout');
+
